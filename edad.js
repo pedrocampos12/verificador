@@ -1,27 +1,22 @@
 function verificarEdad() {
-    const fechaInput = document.getElementById("fecha").value;
-    const resultado = document.getElementById("resultado");
+    // Obtener elemento HTML y recuperar el valor[span_0](start_span)[span_0](end_span)
+    let elementoInput = document.getElementById("edadInput");[span_1](start_span)[span_1](end_span)
+    let valorIngresado = elementoInput.value;[span_2](start_span)[span_2](end_span)
 
-    if (!fechaInput) {
-        resultado.textContent = "Por favor, selecciona una fecha válida.";
+    // Verificar que el campo no esté vacío[span_3](start_span)[span_3](end_span)
+    if (valorIngresado === "") {
+        alert("Por favor, ingresa tu edad.");[span_4](start_span)[span_4](end_span)
         return;
     }
 
-    const hoy = new Date();
-    const fechaNacimiento = new Date(fechaInput);
+    let edad = Number(valorIngresado);
 
-    let edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
-    const mes = hoy.getMonth() - fechaNacimiento.getMonth();
-
-    if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
-        edad--;
-    }
-
-    if (edad >= 18) {
-        resultado.textContent = `Tienes ${edad} años. Acceso permitido (Mayor de edad).`;
-    } else if (edad >= 0) {
-        resultado.textContent = `Tienes ${edad} años. Acceso denegado (Menor de edad).`;
+    // Comprobar que sea un número válido y mayor o igual a cero[span_5](start_span)[span_5](end_span)
+    if (isNaN(edad) || edad < 0) {
+        alert("Ingresa un número válido mayor o igual a cero.");[span_6](start_span)[span_6](end_span)
+    } else if (edad >= 18) {
+        alert("Eres mayor de edad");[span_7](start_span)[span_7](end_span)
     } else {
-        resultado.textContent = "La fecha de nacimiento no puede ser en el futuro.";
+        alert("Eres menor de edad");[span_8](start_span)[span_8](end_span)
     }
 }
