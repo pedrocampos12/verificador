@@ -1,26 +1,27 @@
 function verificarEdad() {
-    // Declaramos la variable para recoger el valor del input
-    let edadInput = document.getElementById("edad").value;
+    const fechaInput = document.getElementById("fecha").value;
+    const resultado = document.getElementById("resultado");
 
-    // Validamos si el input está vacío
-    if (edadInput === "") {
-        alert("Por favor, ingresa tu edad.");
+    if (!fechaInput) {
+        resultado.textContent = "Por favor, selecciona una fecha válida.";
         return;
     }
 
-    // Convertimos el valor a número
-    let edad = parseFloat(edadInput);
+    const hoy = new Date();
+    const fechaNacimiento = new Date(fechaInput);
 
-    // Comprobamos que sea un número válido y mayor o igual a cero
-    if (isNaN(edad) || edad < 0) {
-        alert("Ingresa una edad válida mayor o igual a cero.");
-        return;
+    let edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+    const mes = hoy.getMonth() - fechaNacimiento.getMonth();
+
+    if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
+        edad--;
     }
 
-    // Evaluamos si es mayor o menor de edad
     if (edad >= 18) {
-        alert("Eres mayor de edad");
+        resultado.textContent = `Tienes ${edad} años. Acceso permitido (Mayor de edad).`;
+    } else if (edad >= 0) {
+        resultado.textContent = `Tienes ${edad} años. Acceso denegado (Menor de edad).`;
     } else {
-        alert("Eres menor de edad");
+        resultado.textContent = "La fecha de nacimiento no puede ser en el futuro.";
     }
 }
